@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HyperSpace {
+namespace FourthDimension {
     public class Hypercube : MonoBehaviour {
 
         public Vector4[] shapeVerteces = {
@@ -41,49 +41,51 @@ namespace HyperSpace {
             new Vector2Int(14, 15)
         };
 
+        public ProjectionMode projectionMode;
+
         public Rotation4D rotation;
 
         public Vector4[] visualVerteces;
 
         public Vector4 Rotate4D(Vector4 v, Rotation4D r) {
-            Vector4 res = v;
+            Matrix4x4 rotMat = Matrix4x4.identity;
             { // xy
-                float sin = Mathf.Sin(rotation.xy);
-                float cos = Mathf.Cos(rotation.xy);
-                Matrix4x4 m = new Matrix4x4(new Vector4(cos, -sin, 0, 0), new Vector4(sin, cos, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(0, 0, 0, 1));
-                res = m * res;
-            }
-            { // xz
-                float sin = Mathf.Sin(rotation.xz);
-                float cos = Mathf.Cos(rotation.xz);
-                Matrix4x4 m = new Matrix4x4(new Vector4(cos, 0, -sin, 0), new Vector4(0, 1, 0, 0), new Vector4(sin, 0, cos, 0), new Vector4(0, 0, 0, 1));
-                res = m * res;
-            }
-            { // xw
-                float sin = Mathf.Sin(rotation.xw);
-                float cos = Mathf.Cos(rotation.xw);
-                Matrix4x4 m = new Matrix4x4(new Vector4(cos, 0, 0, -sin), new Vector4(0, 1, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(sin, 0, 0, cos));
-                res = m * res;
+                float sin = Mathf.Sin(rotation.xy * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotation.xy * Mathf.Deg2Rad);
+                Matrix4x4 m = new Matrix4x4(new Vector4(cos, sin, 0, 0), new Vector4(-sin, cos, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(0, 0, 0, 1));
+                rotMat = m * rotMat;
             }
             { // yz
-                float sin = Mathf.Sin(rotation.yz);
-                float cos = Mathf.Cos(rotation.yz);
-                Matrix4x4 m = new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, cos, -sin, 0), new Vector4(0, sin, cos, 0), new Vector4(0, 0, 0, 1));
-                res = m * res;
+                float sin = Mathf.Sin(rotation.yz * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotation.yz * Mathf.Deg2Rad);
+                Matrix4x4 m = new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, cos, sin, 0), new Vector4(0, sin, -cos, 0), new Vector4(0, 0, 0, 1));
+                rotMat = m * rotMat;
+            }
+            { // xz
+                float sin = Mathf.Sin(rotation.zx * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotation.zx * Mathf.Deg2Rad);
+                Matrix4x4 m = new Matrix4x4(new Vector4(cos, 0, -sin, 0), new Vector4(0, 1, 0, 0), new Vector4(sin, 0, cos, 0), new Vector4(0, 0, 0, 1));
+                rotMat = m * rotMat;
+            }
+            { // xw
+                float sin = Mathf.Sin(rotation.xw * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotation.xw * Mathf.Deg2Rad);
+                Matrix4x4 m = new Matrix4x4(new Vector4(cos, 0, 0, -sin), new Vector4(0, 1, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(sin, 0, 0, cos));
+                rotMat = m * rotMat;
             }
             { // yw
-                float sin = Mathf.Sin(rotation.yw);
-                float cos = Mathf.Cos(rotation.yw);
+                float sin = Mathf.Sin(rotation.yw * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotation.yw * Mathf.Deg2Rad);
                 Matrix4x4 m = new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, cos, 0, -sin), new Vector4(0, 0, 1, 0), new Vector4(0, sin, 0, cos));
-                res = m * res;
+                rotMat = m * rotMat;
             }
             { // zw
-                float sin = Mathf.Sin(rotation.zw);
-                float cos = Mathf.Cos(rotation.zw);
+                float sin = Mathf.Sin(rotation.zw * Mathf.Deg2Rad);
+                float cos = Mathf.Cos(rotation.zw * Mathf.Deg2Rad);
                 Matrix4x4 m = new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, 1, 0, 0), new Vector4(0, 0, cos, -sin), new Vector4(0, 0, sin, cos));
-                res = m * res;
+                rotMat = m * rotMat;
             }
-            return res;
+            return rotMat * v;
         }
 
         // Start is called before the first frame update
@@ -95,14 +97,25 @@ namespace HyperSpace {
 
         // Update is called once per frame
         void Update() {
-            rotation.xw += Time.deltaTime * 1f;
-            rotation.xz += Time.deltaTime * 1.5f;
-            rotation.yw += Time.deltaTime * 2f;
+            //rotation.xw += Time.deltaTime * 1f;
+            //rotation.xz += Time.deltaTime * 1.5f;
+            //rotation.yw += Time.deltaTime * 2f;
             for (int i = 0; i < shapeVerteces.Length; i++) {
                 visualVerteces[i] = Rotate4D(shapeVerteces[i], rotation);
             }
             foreach (var edge in shapeEdges) {
-                Debug.DrawLine(visualVerteces[edge.x], visualVerteces[edge.y], Color.red);
+                Debug.DrawLine(ProjectTo3D(visualVerteces[edge.x]), ProjectTo3D(visualVerteces[edge.y]), Color.red);
+            }
+        }
+
+        private Vector3 ProjectTo3D(Vector4 v4) {
+            switch (projectionMode) {
+                case ProjectionMode.Othogonal:
+                    return v4;
+                case ProjectionMode.Perspective:
+                    return (v4) / (v4.w + 5f);
+                default:
+                    return Vector4.zero;
             }
         }
     }

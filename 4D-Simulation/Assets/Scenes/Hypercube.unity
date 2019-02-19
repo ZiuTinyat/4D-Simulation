@@ -192,6 +192,8 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669907}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -262,6 +264,142 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb6761a1b8683e418c1bbb485a6ce7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projection4D: 1
+--- !u!114 &534669907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f758e3ec38ab62d4588254efb0ef9191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos_w: 0
+  rot_w: {x: 0, y: 0, z: 0}
+--- !u!1 &1002932650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1002932654}
+  - component: {fileID: 1002932651}
+  - component: {fileID: 1002932652}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1002932651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002932650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f758e3ec38ab62d4588254efb0ef9191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos_w: 0
+  rot_w: {x: 0, y: 0, z: 0}
+--- !u!114 &1002932652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002932650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c004b64456255c478f75c8adec37670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapeVerteces:
+  - {x: 1, y: 1, z: 1, w: 1}
+  - {x: 1, y: 1, z: 1, w: -1}
+  - {x: 1, y: 1, z: -1, w: 1}
+  - {x: 1, y: 1, z: -1, w: -1}
+  - {x: 1, y: -1, z: 1, w: 1}
+  - {x: 1, y: -1, z: 1, w: -1}
+  - {x: 1, y: -1, z: -1, w: 1}
+  - {x: 1, y: -1, z: -1, w: -1}
+  - {x: -1, y: 1, z: 1, w: 1}
+  - {x: -1, y: 1, z: 1, w: -1}
+  - {x: -1, y: 1, z: -1, w: 1}
+  - {x: -1, y: 1, z: -1, w: -1}
+  - {x: -1, y: -1, z: 1, w: 1}
+  - {x: -1, y: -1, z: 1, w: -1}
+  - {x: -1, y: -1, z: -1, w: 1}
+  - {x: -1, y: -1, z: -1, w: -1}
+  shapeEdges:
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 0, y: 4}
+  - {x: 0, y: 8}
+  - {x: 1, y: 3}
+  - {x: 1, y: 5}
+  - {x: 1, y: 9}
+  - {x: 2, y: 3}
+  - {x: 2, y: 6}
+  - {x: 2, y: 10}
+  - {x: 3, y: 7}
+  - {x: 3, y: 11}
+  - {x: 4, y: 5}
+  - {x: 4, y: 6}
+  - {x: 4, y: 12}
+  - {x: 5, y: 7}
+  - {x: 5, y: 13}
+  - {x: 6, y: 7}
+  - {x: 6, y: 14}
+  - {x: 7, y: 15}
+  - {x: 8, y: 9}
+  - {x: 8, y: 10}
+  - {x: 8, y: 12}
+  - {x: 9, y: 11}
+  - {x: 9, y: 13}
+  - {x: 10, y: 11}
+  - {x: 10, y: 14}
+  - {x: 11, y: 15}
+  - {x: 12, y: 13}
+  - {x: 12, y: 14}
+  - {x: 13, y: 15}
+  - {x: 14, y: 15}
+  visualVerteces: []
+--- !u!4 &1002932654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002932650}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2120708650
 GameObject:
@@ -356,4 +494,12 @@ MonoBehaviour:
   - {x: 12, y: 14}
   - {x: 13, y: 15}
   - {x: 14, y: 15}
+  projectionMode: 1
+  rotation:
+    yz: 0
+    zx: 0
+    xy: 0
+    xw: 0
+    yw: 0
+    zw: 0
   visualVerteces: []
