@@ -58,10 +58,12 @@ public class TestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(c4.ToWorld(c4.ToEye(new Vector4(2, 3, 4, 5))));
+        //Debug.Log(c4.ToWorld(c4.ToEye(new Vector4(2, 3, 4, 5))));
         for (int i = 0; i < shapeVerteces.Length; i++) {
-            visualVerteces[i] = c4.ToWorld(c4.Project(c4.ToEye(shapeVerteces[i])));
+            visualVerteces[i] = c4.ProjectTo3D(t.LocalToWorldPosition(shapeVerteces[i]));
         }
+
+        
         foreach (var edge in shapeEdges) {
             Debug.DrawLine(visualVerteces[edge.x], visualVerteces[edge.y], Color.red);
         }

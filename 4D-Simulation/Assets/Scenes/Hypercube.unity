@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb6761a1b8683e418c1bbb485a6ce7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projection4D: 1
+  projection4D: 0
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2120708651
 Transform:
   m_ObjectHideFlags: 0

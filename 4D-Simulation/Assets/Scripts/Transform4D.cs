@@ -41,6 +41,13 @@ namespace FourthDimension {
             transform.Translate(p, relativeTo);
             pos_w += p.w;
         }
+        public void Rotate() { } // TODO
+        public Vector4 WorldToLocalPosition(Vector4 worldPos) {
+            return worldToLocalMatrix * (worldPos - localPosition);
+        }
+        public Vector4 LocalToWorldPosition(Vector4 localPos) {
+            return localToWorldMatrix * localPos + localPosition;
+        }
         public void LookAt(Vector4 worldPosition) {
             // TODO world
             //Vector4 dir = (worldPosition - localPosition).normalized;
