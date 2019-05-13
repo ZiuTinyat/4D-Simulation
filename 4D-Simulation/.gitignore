@@ -34,3 +34,15 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Steam VR
+Assets/SteamVR/
+
+# Json .net
+Assets/JsonDotNet/
+
+# Double Sided Shader
+Assets/Ciconia Studio/
+
+# Skybox
+Assets/Wispy Sky/

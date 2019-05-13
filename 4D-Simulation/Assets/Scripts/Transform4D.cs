@@ -16,15 +16,15 @@ namespace FourthDimension {
 
         // Position
         //public Vector4 position { get { return GetLocalPosition; } set { SetPosition(value); } }
-        public Vector4 localPosition { get { return GetLocalPosition(); } set { SetLocalPosition(value); } }
-        private Vector4 GetLocalPosition() { return ((Vector4) transform.localPosition + new Vector4(0, 0, 0, pos_w)); }
-        private void SetLocalPosition(Vector4 p) { transform.localPosition = p; pos_w = p.w; }
+        public Vector4 localPosition { get { return _GetLocalPosition(); } set { _SetLocalPosition(value); } } // TODO change back to local
+        private Vector4 _GetLocalPosition() { return ((Vector4) transform.position + new Vector4(0, 0, 0, pos_w)); } // Same
+        private void _SetLocalPosition(Vector4 p) { transform.position = p; pos_w = p.w; }
 
         // Rotation
         //public Rotation4D rotation { get { return GetRotation(); } set { SetRotation(value); } }
-        public Rotation4D localRotaion { get { return GetLocalRotation(); } set { SetLocalRotation(value); } }
-        private Rotation4D GetLocalRotation() { return new Rotation4D(transform.localEulerAngles, rot_w); }
-        private void SetLocalRotation(Rotation4D r) { transform.localEulerAngles = r.ToEuler3D(); rot_w = r.ToEulerW(); }
+        public Rotation4D localRotaion { get { return _GetLocalRotation(); } set { _SetLocalRotation(value); } }
+        private Rotation4D _GetLocalRotation() { return new Rotation4D(transform.eulerAngles, rot_w); } // TODO change back to local
+        private void _SetLocalRotation(Rotation4D r) { transform.eulerAngles = r.ToEuler3D(); rot_w = r.ToEulerW(); } // the same
 
         // Info
         public Vector4 up { get { return localToWorldMatrix * new Vector4(0, 1, 0, 0); } }

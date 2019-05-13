@@ -110,7 +110,7 @@ namespace FourthDimension {
 
         private Vector3 ProjectTo3D(Vector4 v4) {
             switch (projectionMode) {
-                case ProjectionMode.Othogonal:
+                case ProjectionMode.Orthogonal:
                     return v4;
                 case ProjectionMode.Perspective:
                     return (v4) / (v4.w + 5f);

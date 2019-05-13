@@ -4,8 +4,13 @@ using UnityEngine;
 
 namespace FourthDimension {
     public enum ProjectionMode {
-        Othogonal, 
+        Orthogonal, 
         Perspective, 
         Sliced
+    }
+
+    public enum VisualMode {
+        Wireframe, 
+        Solid
     }
 }

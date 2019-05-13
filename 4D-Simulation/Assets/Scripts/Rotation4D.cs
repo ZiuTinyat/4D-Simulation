@@ -41,7 +41,7 @@ namespace FourthDimension {
             { // yz --> x
                 float sin = Mathf.Sin(yz * Mathf.Deg2Rad);
                 float cos = Mathf.Cos(yz * Mathf.Deg2Rad);
-                Matrix4x4 m = new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, cos, sin, 0), new Vector4(0, sin, -cos, 0), new Vector4(0, 0, 0, 1));
+                Matrix4x4 m = new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, cos, sin, 0), new Vector4(0, -sin, cos, 0), new Vector4(0, 0, 0, 1));
                 res = m * res;
             }
             { // xz --> y

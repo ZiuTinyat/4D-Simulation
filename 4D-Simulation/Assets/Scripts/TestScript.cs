@@ -44,15 +44,15 @@ public class TestScript : MonoBehaviour
             new Vector2Int(14, 15)
         };
 
-    public Vector4[] visualVerteces;
+    public Vector3[] visualVerteces;
 
-    Camera4D c4;
+    [SerializeField] Camera4D c4;
 
     // Start is called before the first frame update
     void Start()
     {
         c4 = Camera.main.GetComponent<Camera4D>();
-        visualVerteces = new Vector4[shapeVerteces.Length];
+        visualVerteces = new Vector3[shapeVerteces.Length];
     }
 
     // Update is called once per frame
@@ -60,10 +60,16 @@ public class TestScript : MonoBehaviour
     {
         //Debug.Log(c4.ToWorld(c4.ToEye(new Vector4(2, 3, 4, 5))));
         for (int i = 0; i < shapeVerteces.Length; i++) {
-            visualVerteces[i] = c4.ProjectTo3D(t.LocalToWorldPosition(shapeVerteces[i]));
+            Vector4 myWorldPos = Manager4D.instance.Position4DToMyWorld(t.LocalToWorldPosition(shapeVerteces[i]));
+            visualVerteces[i] = myWorldPos;
+        }
+        int ii = 0;
+        foreach (var lr in transform.GetComponentsInChildren<LineRenderer>()) {
+            lr.SetPosition(0, visualVerteces[shapeEdges[ii].x]);
+            lr.SetPosition(1, visualVerteces[shapeEdges[ii].y]);
+            ii++;
         }
 
-        
         foreach (var edge in shapeEdges) {
             Debug.DrawLine(visualVerteces[edge.x], visualVerteces[edge.y], Color.red);
         }
